@@ -10,6 +10,9 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { s } from "react-native-wind";
 
+import AntDesign from "@expo/vector-icons/AntDesign";
+import SearchBar from "./SearchBar";
+
 // HomeScreen component
 const HomeScreen = () => {
   // Function to handle search icon click
@@ -19,15 +22,87 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={s`bg-primary w-full h-1/4 rounded-br-3xl rounded-bl-3xl`}>
+      <View style={s`bg-primary w-full h-64 rounded-br-3xl rounded-bl-3xl`}>
         {/* Image in the background */}
         <View style={styles.imageContainer}>
-          <Image source={require('../../assets/Image/lines.png')} style={styles.image} />
-          
+          <View style={{ opacity: 0.5 }}>
+            <Image
+              source={require("../../assets/Image/lines.png")}
+              style={styles.image}
+            />
+          </View>
+
           {/* Text over the image */}
           <View style={styles.overlayTextContainer}>
-            <Text style={styles.text}>Your Text Here</Text>
+            <View style={s`w-full h-6 pr-6 pl-6`}>
+              <AntDesign name="menu-fold" size={24} color="white" />
+            </View>
+
+            <View
+              style={s`flex flex-row  justify-between items-center pl-6 pr-6  w-full h-40`}
+            >
+              {/* View for text and date */}
+              <View style={s`flex justify-center w-52 h-full`}>
+                <View
+                  style={[
+                    s` flex justify-center w-full h-8`,
+                    { marginBottom: 5 },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      s`text-gray-500 text-lg`,
+                      { fontFamily: "Outfit-Light", marginTop: 5 },
+                    ]}
+                  >
+                    {"Hey, " + "Khizar" + "!"}
+                  </Text>
+                </View>
+
+                <View>
+                  <View
+                    style={[
+                      s` flex justify-center w-full h-16`,
+                      { marginTop: -15 },
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        s`text-white text-4xl`,
+                        { fontFamily: "Outfit-Bold", letterSpacing: -3 },
+                      ]}
+                    >
+                      {"wednesday" + ","}
+                    </Text>
+                  </View>
+
+                  <View
+                    style={[
+                      s` flex  justify-center w-full h-8`,
+                      { marginTop: -10 },
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        s`text-gray-500 text-xl`,
+                        { fontFamily: "Outfit-Medium" },
+                      ]}
+                    >
+                      22-dec-24
+                    </Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* view for profile image */}
+              <View
+                style={s` rounded-full border border-white border-1 w-16 h-16`}
+              ></View>
+            </View>
           </View>
+
+          {/* SearchBAr */}
+         <SearchBar/>
         </View>
       </View>
     </SafeAreaView>
@@ -39,47 +114,68 @@ const styles = {
   container: {
     flex: 1,
     // justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0', // Set background color for safe area view
+    alignItems: "center",
+    backgroundColor: "#fff", // Set background color for safe area view
   },
   imageContainer: {
-    position: 'relative',  // Makes the container for the image relative so we can position text over it
-    width: '100%',
-    height: '100%', // Takes full height from the parent container
+    position: "relative", // Makes the container for the image relative so we can position text over it
+    width: "100%",
+    height: "100%", // Takes full height from the parent container
   },
   image: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 20, // Optional: add rounded corners to the image
+    width: "100%",
+    height: "100%",
+    borderRadius: 30, // Optional: add rounded corners to the image
+    opacity: 0.2,
   },
   overlayTextContainer: {
-    position: 'absolute',  // Position text absolutely inside the image container
-    top: 20,  // Adjust to move the text lower or higher
+    position: "absolute", // Position text absolutely inside the image container
+    top: 50, // Adjust to move the text lower or higher
     left: 20, // Adjust left to control horizontal position
     right: 20,
-    bottom: 20,  // Optionally adjust the bottom to control vertical positioning
-    // justifyContent: 'center',
-    alignItems: 'center',
+    bottom: 20, // Optionally adjust the bottom to control vertical positioning
+    // justifyContent: "center",
+    alignItems: "center",
     // backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: semi-transparent background for text readability
-    borderRadius: 10, // Optional: rounded corners for the text background
+    borderRadius: 30, // Optional: rounded corners for the text background
+  },
+
+  overlaySearchContainer: {
+    position: "absolute", // Position text absolutely inside the image container
+    top: 220, // Adjust to move the text lower or higher
+    left: 20, // Adjust left to control horizontal position
+    right: 20,
+    bottom: 20, // Optionally adjust the bottom to control vertical positioning
+    justifyContent: "center",
+    alignItems: "center",
+    // backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: semi-transparent background for text readability
+    borderRadius: 30, // Optional: rounded corners for the text background
+    width: "full",
+    height: 60,
+    borderColor: "white",
+    backgroundColor: "#f0f0f0",
+    borderWidth: 2,
+    borderRadius: 18,
+    margin: 6,
   },
   text: {
-    color: 'white',  // Text color
-    fontSize: 24,  // Adjust text size
-    fontWeight: 'bold',  // Text style
-    textAlign: 'left', // Center the text
+    color: "white", // Text color
+    fontSize: 24, // Adjust text size
+    fontWeight: "bold", // Text style
+    textAlign: "left", // Center the text
+    marginTop: 50,
   },
-  
+
   title: [
     s`text-red-400 text-xl`, // Tailwind styles
     { fontFamily: "Poppins-Bold" }, // Custom font family
   ],
   image: {
-    width: '100%', // Adjust width as needed
-    height: '100%', // Adjust height as needed
+    width: "100%", // Adjust width as needed
+    height: "100%", // Adjust height as needed
     borderRadius: 20, // Optionally add rounding to the image as well
   },
-  
+
   searchContainer: s`
     flex-row items-center
     bg-Highlight pt-4 pl-3 pb-4

@@ -35,14 +35,14 @@ const Tab = createBottomTabNavigator(); // Initialize the Tab Navigator
 
 export default function App() {
   const [fontLoaded] = useFonts({
-    'Poppins-Medium': require('./Fonts/Poppins/Poppins-Medium.ttf'),
-    'Poppins-Bold': require('./Fonts/Poppins/Poppins-Bold.ttf'),
-    'Poppins-Light': require('./Fonts/Poppins/Poppins-Light.ttf'),
-    'Syncopate-Bold': require('./Fonts/Syncopate/Syncopate-Bold.ttf'),
-    'Syne-ExtraBold': require('./Fonts/Syne/static/Syne-ExtraBold.ttf'),
-    'Syne-Bold': require('./Fonts/Syne/static/Syne-Bold.ttf'),
-    'Dm-Sans': require('./Fonts/DM_Sans/static/DMSans-Bold.ttf'),
-    'Dm-SansMedium': require('./Fonts/DM_Sans/static/DMSans-Medium.ttf'),
+    'Outfit-Medium': require('./Fonts/Outfit/Outfit-Medium.ttf'),
+   'Outfit-Bold': require('./Fonts/Outfit/Outfit-Bold.ttf'),
+   'Outfit-Light': require('./Fonts/Outfit/Outfit-Light.ttf'),
+   'Outfit-Regular': require('./Fonts/Outfit/Outfit-Regular.ttf'),
+   'Outfit-Thin': require('./Fonts/Outfit/Outfit-Thin.ttf'),
+   'Outfit-ExtraBold': require('./Fonts/Outfit/Outfit-ExtraBold.ttf'),
+
+
   });
 
   if (!fontLoaded) {
@@ -65,8 +65,6 @@ export default function App() {
             borderTopWidth: 0, // Remove border at the top
             borderBottomWidth: 0, // Remove border at the bottom
             position: 'absolute', // Position the tab bar at the bottom
-            borderTopRightRadius:40,
-            borderTopLeftRadius:40,
             left: 0,
             right: 0,
             bottom: 0, // Position it at the bottom of the screen

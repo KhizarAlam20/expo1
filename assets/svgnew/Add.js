@@ -1,5 +1,6 @@
 import * as React from "react";
-import Svg, { G, Rect, Line } from "react-native-svg";
+import Svg, { G, Circle, Line } from "react-native-svg";
+
 const Add = (props) => (
   <Svg
     width={62}
@@ -10,26 +11,12 @@ const Add = (props) => (
     {...props}
   >
     <G id="Frame 5">
-      <Rect
-        x={2}
-        y={-2}
-        width={58}
-        height={58}
-        rx={23}
-        transform="matrix(1 0 0 -1 0 58)"
-        fill="#232222"
-      />
-      <Rect
-        x={2}
-        y={-2}
-        width={58}
-        height={58}
-        rx={23}
-        transform="matrix(1 0 0 -1 0 58)"
-        stroke="#B4ABAB90"
-        strokeWidth={6}
-      />
+      {/* Circle background */}
+      <Circle cx={31} cy={31} r={29} fill="#232222" />
+      {/* Circle border */}
+      <Circle cx={31} cy={31} r={29} stroke="#B4ABAB90" strokeWidth={6} />
       <G id="Group 1">
+        {/* Vertical line */}
         <Line
           id="Line 1"
           x1={31.5}
@@ -39,6 +26,7 @@ const Add = (props) => (
           stroke="white"
           strokeWidth={3}
         />
+        {/* Horizontal line */}
         <Line
           id="Line 2"
           x1={19}
@@ -52,4 +40,5 @@ const Add = (props) => (
     </G>
   </Svg>
 );
+
 export default Add;
