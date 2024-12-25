@@ -6,12 +6,15 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  ScrollView,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { s } from "react-native-wind";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SearchBar from "./SearchBar";
+import Add from "../../assets/svgnew/Add";
+import CardTab from "./CardTab";
 
 // HomeScreen component
 const HomeScreen = () => {
@@ -22,7 +25,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={s`bg-primary w-full h-64 rounded-br-3xl rounded-bl-3xl`}>
+      <View style={s`bg-primary w-full h-64 rounded-br-2xl rounded-bl-2xl`}>
         {/* Image in the background */}
         <View style={styles.imageContainer}>
           <View style={{ opacity: 0.5 }}>
@@ -102,7 +105,66 @@ const HomeScreen = () => {
           </View>
 
           {/* SearchBAr */}
-         <SearchBar/>
+          <SearchBar />
+        </View>
+      </View>
+
+{/* Border here */}
+      <View style={s` w-full h-80 mt-10 pr-9 pl-9`}>
+        {/* project tab */}
+        <View
+          style={s`flex flex-row  pr-2 pl-2 justify-between items-center  w-full h-12  `}
+        >
+          <Text
+            style={[s`text-gray-500 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
+          >
+            Recent Tasks
+          </Text>
+
+          <Text
+            style={[s`text-gray-400 text-lg`, { fontFamily: "Outfit-Light" }]}
+          >
+            see all
+          </Text>
+        </View>
+
+        {/* Project Button */}
+        {/* border here */}
+        <View
+          style={s`flex flex-row  justify-between  w-full h-64  rounded-3xl `}
+        >
+          <ScrollView
+          horizontal
+          scrollEventThrottle={1} // Lower value increases scroll responsiveness
+          showsHorizontalScrollIndicator={false}
+
+          style={s`rounded-3xl`}
+          >
+             <CardTab/>
+             <CardTab/>
+             <CardTab/>
+             <CardTab/>
+             <CardTab/>
+          </ScrollView>
+        </View>
+
+
+
+{/* MARK YOU TAASK */}
+<View
+          style={s`flex flex-row  pr-2 pl-2 justify-between items-center  w-full h-12  mt-5 `}
+        >
+          <Text
+            style={[s`text-gray-500 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
+          >
+            Mark Tasks
+          </Text>
+
+          <Text
+            style={[s`text-gray-400 text-lg`, { fontFamily: "Outfit-Light" }]}
+          >
+            check all
+          </Text>
         </View>
       </View>
     </SafeAreaView>
