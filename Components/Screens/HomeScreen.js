@@ -15,6 +15,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SearchBar from "./SearchBar";
 import Add from "../../assets/svgnew/Add";
 import CardTab from "./CardTab";
+import CheckBoxTab from "./CheckBoxTab";
 
 // HomeScreen component
 const HomeScreen = () => {
@@ -28,6 +29,8 @@ const HomeScreen = () => {
       <View style={s`bg-primary w-full h-64 rounded-br-2xl rounded-bl-2xl`}>
         {/* Image in the background */}
         <View style={styles.imageContainer}>
+
+
           <View style={{ opacity: 0.5 }}>
             <Image
               source={require("../../assets/Image/lines.png")}
@@ -37,10 +40,15 @@ const HomeScreen = () => {
 
           {/* Text over the image */}
           <View style={styles.overlayTextContainer}>
+
+
+            {/* button for drawer */}
+             
             <View style={s`w-full h-6 pr-6 pl-6`}>
               <AntDesign name="menu-fold" size={24} color="white" />
             </View>
-
+           
+            
             <View
               style={s`flex flex-row  justify-between items-center pl-6 pr-6  w-full h-40`}
             >
@@ -110,19 +118,23 @@ const HomeScreen = () => {
       </View>
 
 {/* Border here */}
-      <View style={s` w-full h-80 mt-10 pr-9 pl-9`}>
+      <View style={s` w-full  h-6/12 mt-10 pr-9 pl-9`}>
+       {/* <ScrollView
+        style ={s` h-7/5`}
+       > */}
+       
         {/* project tab */}
         <View
           style={s`flex flex-row  pr-2 pl-2 justify-between items-center  w-full h-12  `}
         >
           <Text
-            style={[s`text-gray-500 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
+            style={[s`text-gray-300 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
           >
             Recent Tasks
           </Text>
 
           <Text
-            style={[s`text-gray-400 text-lg`, { fontFamily: "Outfit-Light" }]}
+            style={[s`text-gray-300 text-lg`, { fontFamily: "Outfit-Light" }]}
           >
             see all
           </Text>
@@ -155,18 +167,34 @@ const HomeScreen = () => {
           style={s`flex flex-row  pr-2 pl-2 justify-between items-center  w-full h-12  mt-5 `}
         >
           <Text
-            style={[s`text-gray-500 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
+            style={[s`text-gray-300 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
           >
             Mark Tasks
           </Text>
 
           <Text
-            style={[s`text-gray-400 text-lg`, { fontFamily: "Outfit-Light" }]}
+            style={[s`text-gray-300 text-lg`, { fontFamily: "Outfit-Light" }]}
           >
             check all
           </Text>
         </View>
+
+
+{/* checkbox */}
+
+
+
+
+       <CheckBoxTab/>
+       <CheckBoxTab/>
+       <CheckBoxTab/>
+       <CheckBoxTab/>
+
+
+
+       {/* </ScrollView> */}
       </View>
+      
     </SafeAreaView>
   );
 };

@@ -8,7 +8,7 @@ customize({
     colors: {
       primary: '#232222',
       secondary: '#863cff',
-      Highlight: '#d9d9d9',
+      Highlight: '#f2f2f2',
 
 
     },

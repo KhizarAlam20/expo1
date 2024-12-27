@@ -20,7 +20,7 @@ const SearchBar = () => {
                <View style={s`flex flex-row  w-full h-full items-center justify-between`}>
                <View style={s`flex flex-row w-2/4 h-6 pr-6 pl-6`}>
                 
-                 <Text>Search</Text>
+                 <Text style={{fontFamily:"Outfit-Medium",color:"gray",fontSize:15}}>Search</Text>
                </View>
    
                <View style={[s`flex bg-primary rounded-xl flex-row  w-10 h-10 justify-center items-center mr-3 `,{marginTop:-5}]}>
