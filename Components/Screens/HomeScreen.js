@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -8,277 +8,215 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 import { s } from "react-native-wind";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 
-import AntDesign from "@expo/vector-icons/AntDesign";
-import SearchBar from "./SearchBar";
-import Add from "../../assets/svgnew/Add";
-import CardTab from "./CardTab";
-import CheckBoxTab from "./CheckBoxTab";
-
-// HomeScreen component
-const HomeScreen = () => {
-  // Function to handle search icon click
-  const handleSearchClick = () => {
-    console.log("Search icon clicked!");
+const HomeScreen = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  // Mock user data
+  const userData = {
+    name: "Khizar",
+    tasksToday: 5,
+    completedToday: 3,
   };
+
+  const TaskProgressCard = () => (
+    <View style={s`bg-primary/10 rounded-2xl p-4 mb-6`}>
+      <View style={s`flex-row justify-between items-center mb-4`}>
+        <View>
+          <Text style={[s`text-gray-600 text-base`, { fontFamily: "Outfit-Medium" }]}>
+            Daily Progress
+          </Text>
+          <Text style={[s`text-gray-800 text-2xl mt-1`, { fontFamily: "Outfit-Bold" }]}>
+            {userData.completedToday}/{userData.tasksToday} Tasks
+          </Text>
+        </View>
+        <View style={s`bg-primary rounded-xl p-2`}>
+          <AntDesign name="barschart" size={24} color="white" />
+        </View>
+      </View>
+      <View style={s`bg-gray-200 h-2 rounded-full`}>
+        <View 
+          style={[
+            s`bg-primary h-2 rounded-full`,
+            { width: `${(userData.completedToday / userData.tasksToday) * 100}%` }
+          ]}
+        />
+      </View>
+    </View>
+  );
+
+  const CategoryButton = ({ icon, label, count, isActive }) => (
+    <TouchableOpacity 
+      style={s`items-center mr-4 bg-${isActive ? 'primary' : 'gray-100'} rounded-xl p-3 w-24`}
+    >
+      {icon}
+      <Text 
+        style={[
+          s`mt-2 ${isActive ? 'text-white' : 'text-gray-600'}`,
+          { fontFamily: "Outfit-Medium" }
+        ]}
+      >
+        {label}
+      </Text>
+      <Text 
+        style={[
+          s`text-xs ${isActive ? 'text-white/80' : 'text-gray-400'}`,
+          { fontFamily: "Outfit-Regular" }
+        ]}
+      >
+        {count} tasks
+      </Text>
+    </TouchableOpacity>
+  );
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={s`bg-primary w-full h-64 rounded-br-2xl rounded-bl-2xl`}>
-        {/* Image in the background */}
-        <View style={styles.imageContainer}>
-
-
-          <View style={{ opacity: 0.5 }}>
+      {/* Header */}
+      <View style={s`bg-primary w-full h-48 rounded-br-3xl rounded-bl-3xl px-6`}>
+        <View style={s`flex-row justify-between items-center mt-12`}>
+          <TouchableOpacity>
+            <AntDesign name="menu-fold" size={24} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
             <Image
               source={require("../../assets/Image/lines.png")}
-              style={styles.image}
+              style={s`w-12 h-12 rounded-full bg-white/20`}
             />
-          </View>
+          </TouchableOpacity>
+        </View>
 
-          {/* Text over the image */}
-          <View style={styles.overlayTextContainer}>
-
-
-            {/* button for drawer */}
-             
-            <View style={s`w-full h-6 pr-6 pl-6`}>
-              <AntDesign name="menu-fold" size={24} color="white" />
-            </View>
-           
-            
-            <View
-              style={s`flex flex-row  justify-between items-center pl-6 pr-6  w-full h-40`}
-            >
-              {/* View for text and date */}
-              <View style={s`flex justify-center w-52 h-full`}>
-                <View
-                  style={[
-                    s` flex justify-center w-full h-8`,
-                    { marginBottom: 5 },
-                  ]}
-                >
-                  <Text
-                    style={[
-                      s`text-gray-500 text-lg`,
-                      { fontFamily: "Outfit-Light", marginTop: 5 },
-                    ]}
-                  >
-                    {"Hey, " + "Khizar" + "!"}
-                  </Text>
-                </View>
-
-                <View>
-                  <View
-                    style={[
-                      s` flex justify-center w-full h-16`,
-                      { marginTop: -15 },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        s`text-white text-4xl`,
-                        { fontFamily: "Outfit-Bold", letterSpacing: -3 },
-                      ]}
-                    >
-                      {"wednesday" + ","}
-                    </Text>
-                  </View>
-
-                  <View
-                    style={[
-                      s` flex  justify-center w-full h-8`,
-                      { marginTop: -10 },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        s`text-gray-500 text-xl`,
-                        { fontFamily: "Outfit-Medium" },
-                      ]}
-                    >
-                      22-dec-24
-                    </Text>
-                  </View>
-                </View>
-              </View>
-
-              {/* view for profile image */}
-              <View
-                style={s` rounded-full border border-white border-1 w-16 h-16`}
-              ></View>
-            </View>
-          </View>
-
-          {/* SearchBAr */}
-          <SearchBar />
+        <View style={s`mt-6`}>
+          <Text style={[s`text-white/60 text-base`, { fontFamily: "Outfit-Regular" }]}>
+            Hello,
+          </Text>
+          <Text style={[s`text-white text-2xl mt-1`, { fontFamily: "Outfit-Bold" }]}>
+            {userData.name}! 👋
+          </Text>
         </View>
       </View>
 
-{/* Border here */}
-      <View style={s` w-full  h-6/12 mt-10 pr-9 pl-9`}>
-       {/* <ScrollView
-        style ={s` h-7/5`}
-       > */}
-       
-        {/* project tab */}
-        <View
-          style={s`flex flex-row  pr-2 pl-2 justify-between items-center  w-full h-12  `}
-        >
-          <Text
-            style={[s`text-gray-300 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
-          >
-            Recent Tasks
-          </Text>
+      {/* Search Bar - Positioned to overlap with header */}
+      <View style={s`px-6 -mt-6`}>
+        <View style={s`bg-white rounded-xl shadow-sm flex-row items-center px-4 py-3`}>
+          <AntDesign name="search1" size={20} color="#666" />
+          <TextInput
+            style={[s`flex-1 ml-3 text-gray-800`, { fontFamily: "Outfit-Regular" }]}
+            placeholder="Search tasks..."
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+        </View>
+      </View>
 
-          <Text
-            style={[s`text-gray-300 text-lg`, { fontFamily: "Outfit-Light" }]}
-          >
-            see all
-          </Text>
+      <ScrollView style={s`flex-1 px-6`} showsVerticalScrollIndicator={false}>
+        {/* Progress Card */}
+        <View style={s`mt-6`}>
+          <TaskProgressCard />
         </View>
 
-        {/* Project Button */}
-        {/* border here */}
-        <View
-          style={s`flex flex-row  justify-between  w-full h-64  rounded-3xl `}
-        >
-          <ScrollView
-          horizontal
-          scrollEventThrottle={1} // Lower value increases scroll responsiveness
-          showsHorizontalScrollIndicator={false}
-
-          style={s`rounded-3xl`}
+        {/* Categories */}
+        <View style={s`mt-2`}>
+          <Text style={[s`text-gray-800 text-xl mb-4`, { fontFamily: "Outfit-Bold" }]}>
+            Categories
+          </Text>
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            style={s`mb-6`}
           >
-             <CardTab/>
-             <CardTab/>
-             <CardTab/>
-             <CardTab/>
-             <CardTab/>
+            <CategoryButton
+              icon={<AntDesign name="clockcircle" size={24} color="white" />}
+              label="Today"
+              count="5"
+              isActive={true}
+            />
+            <CategoryButton
+              icon={<AntDesign name="star" size={24} color="#666" />}
+              label="Important"
+              count="3"
+              isActive={false}
+            />
+            <CategoryButton
+              icon={<AntDesign name="calendar" size={24} color="#666" />}
+              label="Planned"
+              count="12"
+              isActive={false}
+            />
           </ScrollView>
         </View>
 
+        {/* Recent Tasks */}
+        <View style={s`mt-2`}>
+          <View style={s`flex-row justify-between items-center mb-4`}>
+            <Text style={[s`text-gray-800 text-xl`, { fontFamily: "Outfit-Bold" }]}>
+              Recent Tasks
+            </Text>
+            <TouchableOpacity>
+              <Text style={[s`text-primary`, { fontFamily: "Outfit-Medium" }]}>
+                See all
+              </Text>
+            </TouchableOpacity>
+          </View>
 
+          {/* Task Cards */}
+          {[1, 2, 3].map((index) => (
+            <TouchableOpacity
+              key={index}
+              style={s`bg-white rounded-xl p-4 mb-4 shadow-sm border border-gray-100`}
+            >
+              <View style={s`flex-row justify-between items-start`}>
+                <View style={s`flex-1`}>
+                  <Text style={[s`text-gray-800 text-lg`, { fontFamily: "Outfit-Bold" }]}>
+                    Mobile App Design
+                  </Text>
+                  <Text 
+                    style={[s`text-gray-500 mt-1`, { fontFamily: "Outfit-Regular" }]}
+                    numberOfLines={2}
+                  >
+                    Create wireframes for the new mobile app interface
+                  </Text>
+                </View>
+                <View style={s`bg-primary/10 rounded-lg p-2`}>
+                  <AntDesign name="right" size={20} color="#666" />
+                </View>
+              </View>
 
-{/* MARK YOU TAASK */}
-<View
-          style={s`flex flex-row  pr-2 pl-2 justify-between items-center  w-full h-12  mt-5 `}
-        >
-          <Text
-            style={[s`text-gray-300 text-xl`, { fontFamily: "Outfit-Bold" , letterSpacing:-1}]}
-          >
-            Mark Tasks
-          </Text>
-
-          <Text
-            style={[s`text-gray-300 text-lg`, { fontFamily: "Outfit-Light" }]}
-          >
-            check all
-          </Text>
+              <View style={s`flex-row justify-between items-center mt-4`}>
+                <View style={s`flex-row items-center`}>
+                  <AntDesign name="clockcircle" size={16} color="#666" />
+                  <Text style={[s`ml-2 text-gray-500`, { fontFamily: "Outfit-Medium" }]}>
+                    2:30 PM
+                  </Text>
+                </View>
+                <View style={s`bg-orange-100 rounded-full px-3 py-1`}>
+                  <Text style={[s`text-orange-600`, { fontFamily: "Outfit-Medium" }]}>
+                    In Progress
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
+      </ScrollView>
 
-
-{/* checkbox */}
-
-
-
-
-       <CheckBoxTab/>
-       <CheckBoxTab/>
-       <CheckBoxTab/>
-       <CheckBoxTab/>
-
-
-
-       {/* </ScrollView> */}
-      </View>
-      
+      {/* Floating Action Button */}
+      <TouchableOpacity 
+        style={s`absolute bottom-8 right-6 bg-primary w-14 h-14 rounded-full items-center justify-center shadow-lg`}
+        onPress={() => navigation.navigate('AddTask')}
+      >
+        <AntDesign name="plus" size={24} color="white" />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
 
-// Styles outside the component to keep the code clean and organized
 const styles = {
   container: {
     flex: 1,
-    // justifyContent: 'center',
-    alignItems: "center",
-    backgroundColor: "#fff", // Set background color for safe area view
+    backgroundColor: "#fff",
   },
-  imageContainer: {
-    position: "relative", // Makes the container for the image relative so we can position text over it
-    width: "100%",
-    height: "100%", // Takes full height from the parent container
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 30, // Optional: add rounded corners to the image
-    opacity: 0.2,
-  },
-  overlayTextContainer: {
-    position: "absolute", // Position text absolutely inside the image container
-    top: 50, // Adjust to move the text lower or higher
-    left: 20, // Adjust left to control horizontal position
-    right: 20,
-    bottom: 20, // Optionally adjust the bottom to control vertical positioning
-    // justifyContent: "center",
-    alignItems: "center",
-    // backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: semi-transparent background for text readability
-    borderRadius: 30, // Optional: rounded corners for the text background
-  },
-
-  overlaySearchContainer: {
-    position: "absolute", // Position text absolutely inside the image container
-    top: 220, // Adjust to move the text lower or higher
-    left: 20, // Adjust left to control horizontal position
-    right: 20,
-    bottom: 20, // Optionally adjust the bottom to control vertical positioning
-    justifyContent: "center",
-    alignItems: "center",
-    // backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: semi-transparent background for text readability
-    borderRadius: 30, // Optional: rounded corners for the text background
-    width: "full",
-    height: 60,
-    borderColor: "white",
-    backgroundColor: "#f0f0f0",
-    borderWidth: 2,
-    borderRadius: 18,
-    margin: 6,
-  },
-  text: {
-    color: "white", // Text color
-    fontSize: 24, // Adjust text size
-    fontWeight: "bold", // Text style
-    textAlign: "left", // Center the text
-    marginTop: 50,
-  },
-
-  title: [
-    s`text-red-400 text-xl`, // Tailwind styles
-    { fontFamily: "Poppins-Bold" }, // Custom font family
-  ],
-  image: {
-    width: "100%", // Adjust width as needed
-    height: "100%", // Adjust height as needed
-    borderRadius: 20, // Optionally add rounding to the image as well
-  },
-
-  searchContainer: s`
-    flex-row items-center
-    bg-Highlight pt-4 pl-3 pb-4
-    rounded-xl mt-10 shadow-md
-    ml-8 mr-8
-  `,
-
-  icon: s`mr-3 ml-3`,
-
-  input: [
-    s`flex-1 text-base text-gray-700`, // Tailwind styles
-    { fontFamily: "Poppins-Medium" }, // Custom font family
-  ],
 };
 
 export default HomeScreen;

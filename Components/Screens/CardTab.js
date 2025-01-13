@@ -14,6 +14,7 @@ import { s } from "react-native-wind";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SearchBar from "./SearchBar";
 import Add from "../../assets/svgnew/Add";
+import { BlurView } from "expo-blur";
 
 const CardTab = () => {
   return (
@@ -37,6 +38,16 @@ const CardTab = () => {
           count is 50 and word count 17.
         </Text>
       </View>
+      
+       {/* New view with white background, 10% opacity, and background blur */}
+       {/* <View style={s`mr-4 ml-5 mt-4`}>
+        <BlurView
+          intensity={50} // Adjust blur intensity (0-100)
+          style={[styles.blurContainer, { borderRadius: 5 }]}
+        >
+          <Text style={styles.dateText}>12/28/2024</Text>
+        </BlurView>
+      </View> */}
 
       {/* Third view with an arrow icon pointing right */}
       <View style={[styles.arrowContainer]}>
@@ -58,6 +69,13 @@ const styles = StyleSheet.create({
     borderWidth: 2, // set the width of the border
     justifyContent: "center",
     alignItems: "center",
+  },
+  blurContainer: {
+    width: 56, // w-14
+    height: 28, // h-7
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.1)", // white with 10% opacity
   },
 });
 
