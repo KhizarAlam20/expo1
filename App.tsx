@@ -26,34 +26,35 @@ import List from './assets/svgnew/List.js';
 import Fav from './assets/svgnew/Fav.js';
 import Circle from './assets/svgnew/CircleIcon.js';
 import CircleIcon from './assets/svgnew/CircleIcon.js';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './Components/Screens/LoginScreen.js';
+import SignUpScreen from './Components/Screens/SignUpScreen.js';
+import ForgotPasswordScreen from './Components/Screens/ForgotPasswordScreen.js';
+import CustomDrawer from './Components/Screens/CustomDrawer.js';
 // import { Circle } from 'react-native-svg';
 
-const Tab = createBottomTabNavigator(); // Initialize the Tab Navigator
+// Initialize the bottom tab navigator
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 
-
-
-export default function App() {
-  const [fontLoaded] = useFonts({
-    'Outfit-Medium': require('./Fonts/Outfit/Outfit-Medium.ttf'),
-   'Outfit-Bold': require('./Fonts/Outfit/Outfit-Bold.ttf'),
-   'Outfit-Light': require('./Fonts/Outfit/Outfit-Light.ttf'),
-   'Outfit-Regular': require('./Fonts/Outfit/Outfit-Regular.ttf'),
-   'Outfit-Thin': require('./Fonts/Outfit/Outfit-Thin.ttf'),
-   'Outfit-ExtraBold': require('./Fonts/Outfit/Outfit-ExtraBold.ttf'),
-
-
-  });
-
-  if (!fontLoaded) {
-    return null; // Optionally, you could show a loading spinner here
-  }
-
+function AuthStack() {
   return (
-    <NavigationContainer 
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+     <Stack.Screen name="MainApp" component={MainAppTabs} />
+     <Stack.Screen name="CustomDrawer" component={CustomDrawer} />
      
-    >
+    </Stack.Navigator>
+  );
+}
+
+function MainAppTabs(){
+    return (
       <Tab.Navigator
+      initialRouteName="HomeScreen"
         screenOptions={{
           tabBarStyle: {
             backgroundColor: '#f2f2f2', // Tab bar background color
@@ -152,6 +153,28 @@ height:90,
           }}
         />
       </Tab.Navigator>
+    )
+}
+
+export default function App() {
+  const [fontLoaded] = useFonts({
+    'Outfit-Medium': require('./Fonts/Outfit/Outfit-Medium.ttf'),
+   'Outfit-Bold': require('./Fonts/Outfit/Outfit-Bold.ttf'),
+   'Outfit-Light': require('./Fonts/Outfit/Outfit-Light.ttf'),
+   'Outfit-Regular': require('./Fonts/Outfit/Outfit-Regular.ttf'),
+   'Outfit-Thin': require('./Fonts/Outfit/Outfit-Thin.ttf'),
+   'Outfit-ExtraBold': require('./Fonts/Outfit/Outfit-ExtraBold.ttf'),
+
+
+  });
+
+  if (!fontLoaded) {
+    return null; // Optionally, you could show a loading spinner here
+  }
+
+  return (
+    <NavigationContainer>
+      <AuthStack />
     </NavigationContainer>
   );
 }
